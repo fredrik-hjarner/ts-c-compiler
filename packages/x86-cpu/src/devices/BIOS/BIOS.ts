@@ -202,7 +202,7 @@ export class BIOS extends X86UuidAbstractDevice<X86CPU> {
       });
     };
 
-    document.addEventListener('keydown', e => {
+    globalThis.addEventListener('keydown', e => {
       Object.assign(keymap, {
         caps: e.getModifierState('CapsLock'),
         alt: e.altKey,
@@ -215,7 +215,7 @@ export class BIOS extends X86UuidAbstractDevice<X86CPU> {
       keymap.callback?.(e);
     });
 
-    document.addEventListener('keyup', () => clearKeyBuffer(false));
+    globalThis.addEventListener('keyup', () => clearKeyBuffer(false));
 
     /**
      * Returns false if user pressed shift

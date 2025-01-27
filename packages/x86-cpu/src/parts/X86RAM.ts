@@ -24,9 +24,11 @@ export class X86RAM<T extends X86AbstractCPU> extends VirtualMemBlockDriver {
    */
   writeByte(address: number, value: number): number {
     const { vga } = this;
-    const result: number = vga.writeByte(address, value);
-    if (result !== null) {
-      return result;
+    if (vga !== undefined) {
+      const result: number = vga.writeByte(address, value);
+      if (result !== null) {
+        return result;
+      }
     }
 
     return super.writeByte(address, value);
@@ -37,9 +39,11 @@ export class X86RAM<T extends X86AbstractCPU> extends VirtualMemBlockDriver {
    */
   readByte(address: number): number {
     const { vga } = this;
-    const result: number = vga.readByte(address);
-    if (result !== null) {
-      return result;
+    if (vga !== undefined) {
+      const result: number = vga.readByte(address);
+      if (result !== null) {
+        return result;
+      }
     }
 
     return super.readByte(address);

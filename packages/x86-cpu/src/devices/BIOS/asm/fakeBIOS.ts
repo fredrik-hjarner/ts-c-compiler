@@ -15,7 +15,7 @@ export const FAKE_BIOS = `
 
     ; load floppy
     call load_floppy_bootsector
-    call check_signature
+    ; call check_signature
 
     ; reset regs and jmp to bootsector
     xor ax, ax

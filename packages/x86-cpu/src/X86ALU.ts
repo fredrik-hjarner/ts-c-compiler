@@ -17,7 +17,6 @@ import {
 } from './constants/x86';
 
 import { X86CPU } from './X86CPU';
-import { X86Unit } from './X86Unit';
 import { X86Interrupt } from './parts';
 
 type ALUOperatorSchema = {
@@ -62,7 +61,21 @@ export enum X86ALUOperator {
 /**
  * Arithmetic logic unit
  */
-export class X86ALU extends X86Unit {
+export class X86ALU {
+  protected cpu: X86CPU;
+
+  constructor(cpu: X86CPU) {
+    console.log('X86Unit.constructor: typeof this:', typeof this);
+    console.log('X86Unit.constructor: this.constructor.name:', this.constructor.name);
+    console.log('X86Unit.constructor: keys of this:', Object.keys(this));
+    this.cpu = cpu;
+    this.init(cpu);
+  }
+
+  getCPU(): X86CPU {
+    return this.cpu;
+  }
+
   public operators: ALUOperatorsSchemaSet;
 
   protected static flagsCheckersMap: {
@@ -173,11 +186,12 @@ export class X86ALU extends X86Unit {
   /**
    * Init ALU, append instructions to CPU
    */
-  protected init(cpu: X86CPU) {
+  protected init = (cpu: X86CPU) => {
+    console.log('init ALU');
     this.initOperatorsSchema(cpu);
     this.initOperatorsOpcodes(cpu);
     this.initExtraOpcodes(cpu);
-  }
+  };
 
   /**
    * Creates list of operators that can be used in ALU
@@ -185,7 +199,8 @@ export class X86ALU extends X86Unit {
    * @todo
    *  Store it as array, not object. It should be faster!
    */
-  private initOperatorsSchema(cpu: X86CPU): void {
+  private initOperatorsSchema = (cpu: X86CPU): void => {
+    console.log('initOperatorsSchema');
     this.operators = {
       /** Extra operators used in other opcodes */
       extra: {
@@ -247,7 +262,7 @@ export class X86ALU extends X86Unit {
         _c: (s, d) => s - d,
       },
     };
-  }
+  };
 
   /**
    * Parses RM byte and decodes multipler operator

@@ -81,7 +81,11 @@ export class X86CPU extends X86AbstractCPU {
       silent: false,
     };
 
-    this.attach(PIT).attach(CMOS).attach(VGA).attach(Keyboard).attach(BIOS);
+    this.attach(PIT)
+      .attach(CMOS)
+      // .attach(VGA)
+      // .attach(Keyboard)
+      .attach(BIOS);
 
     this.mem = new Uint8Array(1048576);
     this.memIO = new X86RAM<X86CPU>(this, this.mem);
