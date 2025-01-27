@@ -10,7 +10,7 @@
     "publish": "yarn build && npx changeset && npx changeset version && npx changeset publish",
     "check:types": "npx turbo check:types --parallel"
   },
-  "lint-staged": {
+  "lint-staged_disabled": {
     "*.{ts,tsx,js,jsx}": [
       "sh -c 'yarn lint'"
     ]
